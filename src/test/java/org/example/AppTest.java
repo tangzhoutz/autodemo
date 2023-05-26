@@ -78,17 +78,25 @@ public class AppTest {
         return o;
     }
 
-    /**
-     * 工厂实例化模式运行，不能和priority一起使用，否则运行顺序不会以实例化运行。
-     * @param username
-     * @param password
-     * @return
-     */
-    @Factory(dataProvider ="twoParam")
-    public Object[] factory(String username, String password) {
+//    /**
+//     * 工厂实例化模式运行，不能和priority一起使用，否则运行顺序不会以实例化运行。
+//     * @param username
+//     * @param password
+//     * @return
+//     */
+//    @Factory(dataProvider ="twoParam")
+//    public Object[] factory(String username, String password) {
+//        System.out.println("factory");
+//        ArrayList<AppTest> test1ArrayList=new ArrayList<>();
+//        test1ArrayList.add(new AppTest(username,password));
+//        return test1ArrayList.toArray();
+//    }
+    @Factory
+    public Object[] factory() {
         System.out.println("factory");
         ArrayList<AppTest> test1ArrayList=new ArrayList<>();
-        test1ArrayList.add(new AppTest(username,password));
+        test1ArrayList.add(new AppTest("guanliyuan","Aa12345678!"));
+//        test1ArrayList.add(new AppTest("guanliyuan","Aa12345678!"));
         return test1ArrayList.toArray();
     }
     /**
@@ -98,50 +106,51 @@ public class AppTest {
     @Test(groups = {"main_business1"}, alwaysRun = true)
     public void login() throws Exception {
         System.out.println("login=("+username+","+password+")");
-//        webDriver.navigate()
+
         //打开指定网页
         webDriver.get("https://tt-dev.unidms.com/Track/");
 
         //输入账号
         //这里分为2步：1、定位到操作元素，2、执行操作
-        webDriver.findElement(By.xpath("//input[@name='UserName']")).sendKeys(username);
+        WebElement usernameText=webDriver.findElement(By.xpath("//input[@name='UserName']"));
+        usernameText.clear();
+        System.out.println("getAttribute outerHTML="+usernameText.getAttribute("outerHTML"));
+        System.out.println("getAttribute name="+usernameText.getAttribute("name"));
+        usernameText.sendKeys("guanliyuan");
         //输入密码
-        webDriver.findElement(By.xpath("//input[@name='Password']")).sendKeys(password);
+        webDriver.findElement(By.xpath("//input[@name='Password']")).sendKeys("Aa12345678!");
         //点击登录按钮
-        webDriver.findElement(By.id("loginBtn")).click();
+        WebElement loginBtn=webDriver.findElement(By.id("loginBtn"));
+
+        loginBtn.click();
         //获取登录后主页的成功标识
         WebElement tab_title = webDriver.findElement(By.xpath("//a[text()='主页']"));
-        WebElement tab_close= webDriver.findElement(By.xpath("//button[@class='dropdown J_tabClose']"));
-
-        //依赖于代码
-        System.out.println("getAttribute textContent="+tab_close.getAttribute("textContent"));
-        //依赖于页面显示
-        System.out.println("getAttribute innerText="+tab_close.getAttribute("innerText"));
-        System.out.println("getAttribute innerHTML="+tab_close.getAttribute("innerHTML"));
-        System.out.println("getAttribute outerHTML="+tab_close.getAttribute("outerHTML"));
-        System.out.println("getAttribute class="+tab_close.getAttribute("class"));
-        System.out.println("getAttribute data-toggle="+tab_close.getAttribute("data-toggle"));
-        System.out.println("getAttribute name="+tab_close.getAttribute("name"));
-
-        System.out.println("DomAttribute willValidate="+tab_close.getDomAttribute("willValidate"));
-        System.out.println("DomAttribute textContent="+tab_close.getDomAttribute("textContent"));
-        System.out.println("DomAttribute class="+tab_close.getDomAttribute("class"));
-        System.out.println("DomAttribute data-toggle="+tab_close.getDomAttribute("data-toggle"));
-        System.out.println("DomAttribute name="+tab_close.getDomAttribute("name"));
-
-
-        System.out.println("DomProperty willValidate="+tab_close.getDomProperty("willValidate"));
-        System.out.println("DomProperty textContent="+tab_close.getDomProperty("textContent"));
-        System.out.println("DomProperty innerText="+tab_close.getDomProperty("innerText"));
-        System.out.println("DomProperty innerHTML="+tab_close.getDomProperty("innerHTML"));
-        System.out.println("DomProperty outerHTML="+tab_close.getDomProperty("outerHTML"));
-        System.out.println("DomProperty class="+tab_close.getDomProperty("class"));
-        System.out.println("DomProperty data-toggle="+tab_close.getDomProperty("data-toggle"));
-        System.out.println("DomProperty name="+tab_close.getDomProperty("name"));
 
         //断言判断上一步的成功标识是否显示，以此判断登录是否成功
         Assert.assertEquals(tab_title.isDisplayed(), true, "login succeed");
+        /**
+         * 以下是操作工厂管理查询的代码
+         */
+        //点击左侧基础信息菜单
+        webDriver.findElement(By.xpath("//span[text()='基础信息']")).click();
+        //点击基础信息下 工厂管理子菜单
+        webDriver.findElement(By.xpath("//a[@data-moduleid='4113']")).click();
 
+        //定位到iframe元素，和普通元素定位一样
+        WebElement iframe_Factory =webDriver.findElement(By.xpath("//iframe[@data-moduleid='4113']"));
+        //切换到此iframe
+        webDriver.switchTo().frame(iframe_Factory);
+
+        //在新打开的页面中，查询条件文本框输入工厂编码
+        webDriver.findElement(By.xpath("//div[@id='FactoryID']/input")).sendKeys("XIX");
+        //selenium动作太快，页面还没反应过来就点了查询，这里加个等待，保证正常查询到数据
+        Thread.sleep(3000);
+        //点击查询按钮
+        webDriver.findElement(By.className("icon-search")).click();
+        //切换到父iframe
+//        webDriver.switchTo().parentFrame();
+        //切换到默认iframe，这里2个方法都可以，但是推荐使用切换到默认iframe
+        webDriver.switchTo().defaultContent();
 
     }
 
