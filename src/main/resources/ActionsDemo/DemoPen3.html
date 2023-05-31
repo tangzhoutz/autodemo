@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>canves</title>
+	</head>
+	<body>
+		<div>
+			<canvas id="canvas" width="600" height="400"></canvas>	
+		</div>
+		<label>画笔宽度：</label>
+		<select id="sel">	
+			<option value="4">4</option>
+			<option value="8">8</option>
+			<option value="16">16</option>
+			<option value="30">30</option>
+		</select>
+		 画笔颜色:<input type="color" name="color1" id="color1"/><br />
+		 	<br /><br /><br />
+		<input type="button" value="生成图片" onclick="generate_picture()">
+		<input type="button" value="下载图片" onclick="download_picture()"><br>
+		<img id="image" src="" width="500px" height="200px">
+	</body>
+
+	
+<script  type="text/javascript">
+	var canvas=document.getElementById("canvas");
+	var ctx=canvas.getContext("2d");
+	//画一个黑色矩形
+	ctx.fillStyle="#002200";//绘制填充颜色
+	ctx.fillRect(0,0,600,400);//绘制一个被填充的矩形
+	
+	//按下标记
+	var onoff=false;
+	//定义起始位置
+	var oldx=-10;
+	var oldy=-10;
+	//设置画笔颜色默认为白色
+	var linecolor="white";
+	//画笔宽度默认为4
+	var linw=4;
+	changeColor();
+	
+	//鼠标移动事件，事件绑定
+	canvas.addEventListener("mousemove",draw);
+	canvas.addEventListener("mousedown",down);
+	canvas.addEventListener("mouseup",up);
+	
+	// 下笔时按下标记打开，给oldx、oldy赋值
+	function down(event){
+		console.log(event);
+		onoff=true;
+		oldx=event.pageX-10;
+		oldy=event.pageY-10;
+		}
+		
+	//检测鼠标离开后，按下标记关闭	
+	function up(){
+		onoff=false;
+	}
+	
+	//画图，按下标记打开
+	function draw(event){
+		if(onoff==true)
+			{
+				var newx=event.pageX-10;
+				var newy=event.pageY-10;
+				// 起始一条路径，或重置当前路径。
+				ctx.beginPath();
+				// 把路径移动到画布中的指定点，不创建线条。
+				ctx.moveTo(oldx,oldy);
+				// 添加一个新点，然后在画布中创建从该点到最后指定点的线条。
+				ctx.lineTo(newx,newy);
+				// 设置或返回用于笔触的颜色、渐变或模式。
+				ctx.strokeStyle=linecolor;
+				// 设置或返回当前的线条宽度。
+				ctx.lineWidth=linw;
+				// 设置或返回线条的结束端点样式。
+				ctx.lineCap="round";
+				// 绘制已定义的路径。
+				ctx.stroke();
+				oldx = newx;
+				oldy = newy;
+				// console.log(oldx);
+				// console.log(newx);
+				// console.log(oldy);
+				// console.log(newy);
+			}
+	}		
+	
+	//改变下拉画笔宽度
+	// 页面结束加载之后触发。HTML 事件
+	window.onload=function(){
+		var huabi=document.getElementById("sel");
+		huabi.onchange=function(){//在元素值被改变时运行的脚本。
+			linw=huabi.value;
+		};
+		//linw=huabi;
+	};
+	
+	// 改变画笔颜色
+	function changeColor(){
+		var color1 = document.getElementById("color1");
+		color1.onchange=function(){//在元素值被改变时运行的脚本。
+			linecolor = color1.value; // 获得颜色赋值给画笔
+		};
+		//linw=huabi;
+	};
+	
+	// 生成图片
+	function generate_picture(){
+		const dataImg = new Image();
+		// canvas生成图片
+		dataImg.src = canvas.toDataURL('image/png');
+		// document.getElementById("image").src=canvas.toDataURL("image/jpg");
+		document.getElementById("image").src=dataImg.src;
+		//window.open("demo.htm", "height=100px, width=400px");
+		//alert(document.getElementById("image"));
+	};
+	
+	// 下载图片
+	function download_picture(){
+		const dataImg = new Image();
+		dataImg.src = canvas.toDataURL('image/png');
+		document.querySelector('#image').appendChild(dataImg)
+		const alink = document.createElement("a");
+		alink.href = dataImg.src;
+		alink.download = "testImg.jpg";
+		alink.click();
+	}
+</script>
+	
+	<style>
+	/* cursor属性定义了鼠标指针放在一个元素边界范围内时所用的光标形状 */
+		#canvas{cursor:crosshair;}
+	</style>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>图片拖拽</title>
+<style>
+	#d1{
+			width:300px;
+			height:300px;
+			padding:10px;
+			border:6px solid #fff; 
+			position:absolute;
+			top: 30px;
+			left: 33px;
+		}
+	#d2{
+			width:300px;
+			height:300px;
+			padding:10px;
+			border:6px solid #fff;
+			position:absolute; 
+			margin-top:380px;
+			margin-left:380px;
+		}
+	#d3{
+			width:300px;
+			height:300px;
+			padding:10px;
+			border:6px solid #fff;
+			position:absolute; 
+			margin-left:380px;
+			top: 30px;
+		}
+	#d4{
+			width:300px;
+			height:300px;
+			padding:10px;
+			border:6px solid #fff;
+			position:absolute; 
+			margin-top:380px;
+			left: 33px;
+		}
+	#d5{
+		border: 1px solid #fff;
+		background: #7671B9;
+		width: 740px;
+		height: 730px;
+	}
+</style>
+<script>
+	function tz(event){
+		event.preventDefault();
+	}
+
+	function drag(event){
+		event.dataTransfer.setData("Text",event.target.id);
+	}
+
+	function drop(event){
+		event.preventDefault();
+		var data = event.dataTransfer.getData("Text");
+		event.target.appendChild(document.getElementById(data));
+	}
+</script>
+</head>
+
+<body>
+<div id="d5">
+    <div id="d1" ondrop="drop(event)" ondragover="tz(event)">
+      <img src="1.jpg" draggable="true" ondragstart="drag(event)" id="drag1" width="300px" height="300px;" />
+    </div>
+    <div id="d2" ondrop="drop(event)" ondragover="tz(event)"></div>
+    <div id="d3" ondrop="drop(event)" ondragover="tz(event)"></div>
+    <div id="d4" ondrop="drop(event)" ondragover="tz(event)"></div>
+</div>
+</body>
+</html>

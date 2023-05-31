@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="../css/theme.css" charset="utf-8"/>
+         
+        <title>元素操作实例-确认框（确认、取消）</title>
+         
+        <script type="text/javascript">
+        function op_confirm() {
+            var op = confirm("这是一个确认消息框示例，是否执行删除操作？")
+             
+            if(op == true) {
+                document.write("您按下了确认操作键！")
+            } else {
+                document.write("你按下了取消操作键！")
+            }
+        }
+        </script>
+    </head>
+     
+    <body>
+        <div>
+            <input class="alert" type="button" onclick="op_confirm()" value="显示确认框" />
+        </div>
+    </body>
+</html>

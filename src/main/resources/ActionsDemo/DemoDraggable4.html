@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+* {
+  padding: 0;
+  margin: 0;
+}
+.drag {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  background: #006eff;
+  user-select: none;
+  cursor: grab;
+}
+.drop {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  width: 400px;
+  height: 400px;
+  background: #ececec;
+}
+
+  </style>
+</head>
+
+<body>
+
+<div>
+  <div class="drag" draggable="true" id="dragger" ondragstart="handleDragStart(event)" ondrag="handleDrag(event)" ondragend="handleDragEnd(event)">
+    拖动元素
+  </div>
+  <div class="drop" ondrop="handleDrop(event)" ondragenter="handleDragEnter(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+    放置区域
+  </div>
+</div>
+
+  <!-- js实现代码 -->
+  <script>
+   var img = new Image();
+img.src =
+  "https://p6-bd-official.byteimg.com/img/bytedance-cn/4ac74bbefc4455d0b350fff1fcd530c7~noop.image";
+img.onload = () => {
+  console.log("图片加载成功！");
+};
+
+/* 拖拽元素响应事件 */
+function handleDragStart(e) {
+  console.log("dragStart");
+  e.dataTransfer.setDragImage(img, 0, 0);
+  e.dataTransfer.setData("DRAG_NODE_ID", e.target.id);
+}
+function handleDrag(e) {
+  console.log("drag");
+}
+function handleDragEnd(e) {
+  console.log("dragEnd");
+}
+
+/* 放置元素响应事件 */
+function handleDragEnter(e) {
+  console.log("dragEnter");
+}
+function handleDragOver(e) {
+  // console.log("dragOver");
+  e.preventDefault();
+}
+function handleDragLeave(e) {
+  console.log("dragLeave");
+}
+function handleDrop(e) {
+  console.log("drop");
+  e.preventDefault();
+  var data = e.dataTransfer.getData("DRAG_NODE_ID");
+  e.target.appendChild(document.getElementById(data));
+}
+
+  </script>
+</body>
+
+</html>

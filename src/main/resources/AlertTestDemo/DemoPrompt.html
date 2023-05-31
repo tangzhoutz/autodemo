@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="../css/theme.css" charset="utf-8"/>
+         
+        <title>元素操作实例-输入提示框</title>
+         
+        <script type="text/javascript">
+        function op_prompt() {
+            var name = prompt("Please enter your name ：", "http://www.cnblogs.com/fengpingfan/")
+             
+            if((name == "范丰平" || name == "http://www.cnblogs.com/fengpingfan/") && name != "") {
+                document.getElementById('content').innerHTML = "Welcome to my cnblogs : <a href=\"http://www.cnblogs.com/fengpingfan/\">范丰平-博客园</a>"
+            } else if (name == "") {
+                document.getElementById('content').innerHTML = "Input nothing !"
+            } else if (name == null) {
+                document.getElementById('content').innerHTML = "Clicked cancel button !"
+            } else {
+                document.getElementById('content').innerHTML = "<a>Input content is : " + name + "</a>"
+            }
+        }
+        </script>
+    </head>
+     
+    <body>
+        <div id="content">
+        </div>
+        <div>
+            <input class="alert" type="button" onclick="op_prompt()" value="显示输入提示框" />
+        </div>
+    </body>
+</html>

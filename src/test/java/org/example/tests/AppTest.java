@@ -1,9 +1,8 @@
-package org.example;
+package org.example.tests;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -112,16 +111,11 @@ public class AppTest {
 
         //输入账号
         //这里分为2步：1、定位到操作元素，2、执行操作
-        WebElement usernameText=webDriver.findElement(By.xpath("//input[@name='UserName']"));
-        usernameText.clear();
-        System.out.println("getAttribute outerHTML="+usernameText.getAttribute("outerHTML"));
-        System.out.println("getAttribute name="+usernameText.getAttribute("name"));
-        usernameText.sendKeys("guanliyuan");
+        webDriver.findElement(By.xpath("//input[@name='UserName']")).sendKeys("guanliyuan");
         //输入密码
         webDriver.findElement(By.xpath("//input[@name='Password']")).sendKeys("Aa12345678!");
         //点击登录按钮
         WebElement loginBtn=webDriver.findElement(By.id("loginBtn"));
-
         loginBtn.click();
         //获取登录后主页的成功标识
         WebElement tab_title = webDriver.findElement(By.xpath("//a[text()='主页']"));
@@ -165,6 +159,8 @@ public class AppTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //切换到默认iframe
+        webDriver.switchTo().defaultContent();
         //点击退出按钮
         webDriver.findElement(By.xpath("//a[contains(text(),'退出')]")).click();
         //退出弹框中点击确认按钮
