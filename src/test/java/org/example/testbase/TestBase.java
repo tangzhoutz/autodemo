@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class TestBase {
 
-    private Map<String,String> caseData;
+    public Map<String,String> caseData;
     public WebDriver webDriver;
     @BeforeClass(alwaysRun = true)
     public void beforeClass(){

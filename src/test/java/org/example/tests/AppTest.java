@@ -2,6 +2,7 @@ package org.example.tests;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.example.testbase.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,96 +16,27 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest {
-    public static int flag=1;
-    private String username;
-    private String password;
-    public WebDriver webDriver;
-    @BeforeClass(alwaysRun = true)
-    public void beforeClass(){
-        //谷歌浏览器的配置选项
-        ChromeOptions options = new ChromeOptions();
-        //设置分辨率，固定分辨率以达到不同电脑不会出现分辨率不一样导致的脚本不兼容
-        options.addArguments("--window-size=1920,1080");
-        //安装最新的chromedriver
-        WebDriverManager.chromedriver().setup();
-        //这里就是初始化驱动对象
-        webDriver = new ChromeDriver(options);
-        //设置页面加载超时
-        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(120));
-        //设置等待超时
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-        //最大化浏览器
-        webDriver.manage().window().maximize();
-        System.out.println("beforeTest");
-        System.out.println("beforeTest=("+username+","+password+")");
-    }
-    @AfterClass(alwaysRun = true)
-    public void afterClass(ITestContext iTestContext) {
-        if (webDriver != null) {
-            webDriver.quit();
-        }
-        System.out.println("afterTest");
-    }
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod(ITestResult result, Method method) throws Exception{
-        System.out.println("afterMethod");
-    }
-    @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(ITestResult result, Method method) throws Exception{
-        System.out.println("beforeMethod");
-    }
+public class AppTest extends TestBase {
     public AppTest() {
         System.out.println("AppTest 3333");
     }
-    public AppTest(String username, String password) {
-        System.out.println("AppTest(String username, String password)=("+username+","+password+")");
-        this.username = username;
-        this.password = password;
-    }
-    @DataProvider(name = "twoParam")
-    public Object[][] provideDate(){
-        System.out.println("provideDate");
-        Object[][] o = new Object[][] {
-                {"guanliyuan","Aa12345678!"}
-//                ,{"fcpmw","Aa12345678"}
-//                ,{"fcpcy","Aa12345678"}
-        };
-        return o;
+
+    public AppTest(Map<String, String> caseData) {
+        super(caseData);
     }
 
-//    /**
-//     * 工厂实例化模式运行，不能和priority一起使用，否则运行顺序不会以实例化运行。
-//     * @param username
-//     * @param password
-//     * @return
-//     */
-//    @Factory(dataProvider ="twoParam")
-//    public Object[] factory(String username, String password) {
-//        System.out.println("factory");
-//        ArrayList<AppTest> test1ArrayList=new ArrayList<>();
-//        test1ArrayList.add(new AppTest(username,password));
-//        return test1ArrayList.toArray();
-//    }
-    @Factory
-    public Object[] factory() {
-        System.out.println("factory");
-        ArrayList<AppTest> test1ArrayList=new ArrayList<>();
-        test1ArrayList.add(new AppTest("guanliyuan","Aa12345678!"));
-//        test1ArrayList.add(new AppTest("guanliyuan","Aa12345678!"));
-        return test1ArrayList.toArray();
-    }
     /**
      * 登录
      */
     //todo test方法注入 ITestContext Method后 retry时会报错参数数量异常
     @Test(groups = {"main_business1"}, alwaysRun = true)
     public void login() throws Exception {
-        System.out.println("login=("+username+","+password+")");
+        System.out.println("login=("+caseData.get("username")+","+caseData.get("password")+")");
 
         //打开指定网页
         webDriver.get("https://tt-dev.unidms.com/Track/");
