@@ -5,7 +5,7 @@
     <test name="01_NomarlOrder" enabled="true" group-by-instances="true">
     <parameter name= "browser" value ="chrome"/>
       <classes>
-          <class name="org.example.tests.AppTest"/>
+<!--          <class name="org.example.tests.AppTest"/>-->
 <!--          <class name="org.example.tests.AlertTest"/>-->
 <!--          <class name="org.example.tests.NewWindowTest"/>-->
 <!--          <class name="org.example.tests.SelectTest"/>-->
@@ -13,6 +13,7 @@
 <!--          <class name="org.example.tests.BoxTest"/>-->
 <!--          <class name="org.example.tests.DateTimeTest"/>-->
 <!--          <class name="org.example.tests.FileTest"/>-->
+          <class name="org.example.tests.XpathTest"/>
       </classes>
     </test>
 <!--    <listeners>-->

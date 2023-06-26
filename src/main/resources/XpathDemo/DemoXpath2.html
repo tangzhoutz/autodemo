@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>xpath表单实例</title>
+    </head>
+    <body>
+        <h1>xpath表单的基本使用</h1>
+        <!--get与post的区别:1.一个是显式get,会将你提交的数据显示在地址栏中,不安全,
+        一个是隐式post,会隐藏参数 2.一个携带的数据量小GET
+        :128KB,一个携带的数据量大post:2M-->
+        <!--编码格式enctype编码格式定死的 上传文件视频音频是使用 一定要写上
+        让浏览器识别,写上后他才能把这个放在请求头里面响应-->
+
+        <form action='./05-form.php' method='post' enctype='multipart/form-data'>
+            <!--text文本标签 服务器在你提交的时候看的是name和value,
+            在你输入之后会默认的把新输入的内容放到value里面,
+            服务器获取name对应的值value,
+            placeholder是你什么都不输入显示在文本框中的内容
+            maxlength是输入的最大长度,
+            size表示输入框的长度size的写法可以单基本已经废弃
+            一般用style='width:200px;',
+            autofocus移动光标自动显示在用户名上,提示你在这里输入-->
+            <div><label>用户名:</label><input type='text' name='uname'  value='' placeholder='请输入用户名'
+                    maxlength='6' style='width:100px;' autofocus/> </div>
+            <div><label>密  码:</label>  <input type='password' name='pass'></div>
+            <div><label>确认密码:</label><input type='password'/></div>
+            <!--radio单选框,label的作用是点击男字或女字也有效果
+            checked 默认选中,对于单选框和复选框而言-->
+            <div>性别:<label><input type='radio' name='sex' value='m' checked/>男</label>
+                 <label><input type='radio' name='sex' value='w'/>女</label></div>
+            <!--checkbox复选框或者多选框,check[]可以只接收一个name得到四个值
+            可以分别把value的值放入列表中,然后服务器只接收一个name就好-->
+            <div><label>爱好:</label><input type='checkbox' name='check[]' value='lan'/>篮球
+                 <input type='checkbox' name='check[]'value='zu'/>足球
+                 <input type='checkbox' name='check[]' value='ping' checked/>乒乓球
+                 <input type='checkbox' name='check[]'value='yu'/>羽毛球</div>
+            <div><label>文件上传:</label><input type='file' name='pic'/></div>
+            <div><label>籍贯:</label><select name='city'>
+                        <!--option选项的意思-->
+                        <option value='hb'>河北</option>
+                        <option value='bj'>北京</option>
+                        <!--selected起始默认选中,对于下拉框而言-->
+                        <option value='sd' selected>山东</option>
+                        <!--disabled你怎么选也选不中,变灰---->
+                        <option value='hn' disabled>河南</option>
+                </select></div>
+            <!--resize:none文本框不能被自由的扩大和缩小,
+            rows表示文本框的高度也就是行数,cols代表的就是宽度也就是列数-->
+            <div><label>内容:</label><textarea name='areas' style='resize:none' rows='5' cols='40'>
+                 </textarea>
+            </div>
+            <input type='submit' value='注册'/>
+            <input type='button' value='按钮'/><!--没有提交功能-->
+            <!--button这里面可以套一个背景图很多功能都可以实现 常用的-->
+            <button>点击按钮</button>
+            <!--reset把先前写过的东西清空掉-->
+            <input type='reset' value='重置'/>
+            <!--这里有点不动还需再看一下-->
+            <label>隐藏域:</label><input type='hidden' name='id' value='100'/>
+
+
+
+        </form>
+        <!--放在form外面没有提交功能-->
+        <button>点击按钮</button>
+    </body>
+
+</html>
