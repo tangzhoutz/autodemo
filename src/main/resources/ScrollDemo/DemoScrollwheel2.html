@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动条示例</title>
+    <style type="text/css">
+        .nui-scroll{
+            margin-left: 100px;
+            border: 1px solid #000;
+            width: 200px;
+            height: 500px;
+            overflow: auto;
+        }
+        .nui-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        /*正常情况下滑块的样式*/
+        .nui-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,.05);
+            border-radius: 10px;
+            -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+        }
+        /*鼠标悬浮在该类指向的控件上时滑块的样式*/
+        .nui-scroll:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,.2);
+            border-radius: 10px;
+            -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+        }
+        /*鼠标悬浮在滑块上时滑块的样式*/
+        .nui-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0,0,0,.4);
+            -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+        }
+        /*正常时候的主干部分*/
+        .nui-scroll::-webkit-scrollbar-track {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+            background-color: white;
+        }
+        /*鼠标悬浮在滚动条上的主干部分*/
+        .nui-scroll::-webkit-scrollbar-track:hover {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+            background-color: rgba(0,0,0,.01);
+        }
+    </style>
+</head>
+<body>
+    <div id='scrolldiv' class="nui-scroll">
+        <table id='scrolltable' border="1" cellspacing="0" cellpadding="10px">
+			<tr>
+				<td>名次</td>
+				<td colspan="3">分数</td>
+				<td>总分</td>
+				<td>奖金</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1，1</td>
+				<td>1，2</td>
+				<td>1，3</td>
+				<td>1，4</td>
+				<td>1，5</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>2，1</td>
+				<td>2，2</td>
+				<td>2，3</td>
+				<td>2，4</td>
+				<td>2，5</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>3，1</td>
+				<td>3，2</td>
+				<td>3，3</td>
+				<td>3，4</td>
+				<td>3，5</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>4，1</td>
+				<td>4，2</td>
+				<td>4，3</td>
+				<td>4，4</td>
+				<td>4，5</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>5，1</td>
+				<td>5，2</td>
+				<td>5，3</td>
+				<td>5，4</td>
+				<td>5，5</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>6，1</td>
+				<td>6，2</td>
+				<td>6，3</td>
+				<td>6，4</td>
+				<td>6，5</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>7，1</td>
+				<td>7，2</td>
+				<td>7，3</td>
+				<td>7，4</td>
+				<td>7，5</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>8，1</td>
+				<td>8，2</td>
+				<td>8，3</td>
+				<td>8，4</td>
+				<td>8，5</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>9，1</td>
+				<td>9，2</td>
+				<td>9，3</td>
+				<td>9，4</td>
+				<td>9，5</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>10，1</td>
+				<td>10，2</td>
+				<td>10，3</td>
+				<td>10，4</td>
+				<td>10，5</td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>11，1</td>
+				<td>11，2</td>
+				<td>11，3</td>
+				<td>11，4</td>
+				<td>11，5</td>
+			</tr>
+			<tr>
+				<td>12</td>
+				<td>12，1</td>
+				<td>12，2</td>
+				<td>12，3</td>
+				<td>12，4</td>
+				<td>12，5</td>
+			</tr>	
+			<tr>
+				<td>13</td>
+				<td>13，1</td>
+				<td>13，2</td>
+				<td>13，3</td>
+				<td>13，4</td>
+				<td>13，5</td>
+			</tr>	
+			<tr>
+				<td>14</td>
+				<td>14，1</td>
+				<td>14，2</td>
+				<td>14，3</td>
+				<td>14，4</td>
+				<td>14，5</td>
+			</tr>	
+			<tr>
+				<td>15</td>
+				<td>15，1</td>
+				<td>15，2</td>
+				<td>15，3</td>
+				<td>15，4</td>
+				<td>15，5</td>
+			</tr>	
+			<tr>
+				<td>16</td>
+				<td>16，1</td>
+				<td>16，2</td>
+				<td>16，3</td>
+				<td>16，4</td>
+				<td>16，5</td>
+			</tr>	
+			<tr>
+				<td>17</td>
+				<td>17，1</td>
+				<td>17，2</td>
+				<td>17，3</td>
+				<td>17，4</td>
+				<td>17，5</td>
+			</tr>	
+			<tr>
+				<td>18</td>
+				<td>18，1</td>
+				<td>18，2</td>
+				<td>18，3</td>
+				<td>18，4</td>
+				<td>18，5</td>
+			</tr>	
+			<tr>
+				<td>19</td>
+				<td>19，1</td>
+				<td>19，2</td>
+				<td>19，3</td>
+				<td>19，4</td>
+				<td>19，5</td>
+			</tr>	
+			<tr>
+				<td>20</td>
+				<td>20，1</td>
+				<td>20，2</td>
+				<td>20，3</td>
+				<td>20，4</td>
+				<td>20，5</td>
+			</tr>	
+			<tr>
+				<td>21</td>
+				<td>21，1</td>
+				<td>21，2</td>
+				<td>21，3</td>
+				<td>21，4</td>
+				<td>21，5</td>
+			</tr>	
+			<tr>
+				<td>22</td>
+				<td>22，1</td>
+				<td>22，2</td>
+				<td>22，3</td>
+				<td>22，4</td>
+				<td>22，5</td>
+			</tr>				
+			<tr>
+				<td colspan="5">奖金总计</td>
+				<td>430</td>
+			</tr>
+		</table>
+        <!--这里有好多上面这结构为了节省篇幅就省去了-->
+    </div>
+</body>
+</html>

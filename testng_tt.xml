@@ -13,7 +13,9 @@
 <!--          <class name="org.example.tests.BoxTest"/>-->
 <!--          <class name="org.example.tests.DateTimeTest"/>-->
 <!--          <class name="org.example.tests.FileTest"/>-->
-          <class name="org.example.tests.XpathTest"/>
+<!--          <class name="org.example.tests.XpathTest"/>-->
+          <class name="org.example.tests.ScrollTest"/>
+
       </classes>
     </test>
 <!--    <listeners>-->
