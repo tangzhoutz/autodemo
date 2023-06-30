@@ -28,17 +28,13 @@ public class NewWindowTest extends TestBase {
     public NewWindowTest(Map<String, String> caseData) {
         super(caseData);
     }
-
-    /**
-     * 登录
-     * @throws Exception
-     */
-    //todo test方法注入 ITestContext Method后 retry时会报错参数数量异常
-    @Test(groups = {"NewWindowTest"}, alwaysRun = true)
+    @Test(groups = {"NewWindowTest"},enabled=true)
     public void login() throws Exception {
+        /**
+         * 首先登录
+         */
         //打开指定网页
-        webDriver.get("https://tt-dev.unidms.com/Track/");
-
+        webDriver.get("http://tt-dev.unidms.com/Track/");
         //输入账号
         //这里分为2步：1、定位到操作元素，2、执行操作
         webDriver.findElement(By.xpath("//input[@name='UserName']")).sendKeys("guanliyuan");
@@ -49,10 +45,12 @@ public class NewWindowTest extends TestBase {
         loginBtn.click();
         //获取登录后主页的成功标识
         WebElement tab_title = webDriver.findElement(By.xpath("//a[text()='主页']"));
-
         //断言判断上一步的成功标识是否显示，以此判断登录是否成功
         Assert.assertEquals(tab_title.isDisplayed(), true, "login succeed");
+    }
 
+    @Test(groups = {"NewWindowTest"},dependsOnMethods = {"login"})
+    public void switchToWindow() throws Exception {
         /**
          * 以下是窗口切换测试
          */
@@ -70,19 +68,25 @@ public class NewWindowTest extends TestBase {
         Set<String> windowHandles= webDriver.getWindowHandles();
         //遍历所有的windowshandles并且切换过去后输出标题
         for (String windowHandle:windowHandles){
+            //切换到窗口
             webDriver.switchTo().window(windowHandle);
             System.out.println("windowHandle="+windowHandle);
             System.out.println("title="+webDriver.getTitle());
+            if(webDriver.getTitle().contains("百度一下，你就知道")){
+                System.out.println("已正确切换到窗口："+webDriver.getTitle());
+                //使用break退出循环，防止继续切换到其他窗口。
+                break;
+            }
             Thread.sleep(3000);
         }
-        //切换到默认的windowshandle
+        //切换到原窗口
         webDriver.switchTo().window(defaultwindowHandle);
     }
 
     /**
      * 退出登录
      */
-    @Test(groups = {"NewWindowTest"},dependsOnMethods = {"login"}, alwaysRun = true)
+    @Test(groups = {"NewWindowTest"},dependsOnMethods = {"switchToWindow"}, alwaysRun = true)
     public void loginOut() throws Exception {
         try {
             //设置休眠等待3秒

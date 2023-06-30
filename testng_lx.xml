@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TT_Product_Suite">
+    <!--    group-by-instances="true" 配合@Factory使用 实例化运行，不能和priority一起使用，否则运行顺序不会以实例化运行。 -->
+    <test name="01_NomarlOrder" enabled="true" group-by-instances="true">
+        <parameter name= "browser" value ="chrome"/>
+        <classes>
+            <class name="org.example.exercises.IframeTest"/>
+
+        </classes>
+    </test>
+    <!--    <listeners>-->
+    <!--        &lt;!&ndash;配置监听&ndash;&gt;-->
+    <!--        <listener class-name="com.atc.seleniumframework.utilities.listeners.RePrioritizingListener"/>-->
+    <!--    </listeners>-->
+</suite> <!-- Suite -->

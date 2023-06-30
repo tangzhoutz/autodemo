@@ -4,10 +4,12 @@ import org.example.testbase.TestBase;
 import org.example.utilities.general.CommonUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Map;
 
