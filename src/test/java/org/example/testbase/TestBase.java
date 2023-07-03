@@ -32,6 +32,10 @@ public class TestBase {
         ChromeOptions options = new ChromeOptions();
         //设置分辨率，固定分辨率以达到不同电脑不会出现分辨率不一样导致的脚本不兼容
         options.addArguments("--window-size=1920,1080");
+        //从版本 96 开始，Chrome 有了新的无头模式，允许用户获得完整的浏览器功能（甚至运行扩展程序）。
+        // 版本 96 到版本 108 之间 --headless=chrome，版本 109 之后--headless=new。
+        // 设置无头模式
+//        options.addArguments("--headless=new");
         //安装最新的chromedriver
         WebDriverManager.chromedriver().setup();
         //这里就是初始化驱动对象

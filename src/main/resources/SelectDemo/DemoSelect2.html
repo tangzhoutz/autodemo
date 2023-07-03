@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+		function selectcity(){
+			var citys=[["长沙","益阳","常德","株洲","张家界"],
+						["宜昌","武汉","荆门","厂门"],
+						["杭州市","宁波市","温州市","嘉兴市"],
+						["广州","东莞","深圳","珠海"]
+			];
+			var index1=document.getElementById("sid").selectedIndex;//获得用户在省份组合框所选的选项序号  获得所选项的序列号，方便匹配上面二维数组添加
+			var option1=document.getElementById("ssid");//添加到该节点下，需要一一循环
+			option1.options.length=1;//直接设置总长度为1,留一个《请选择》，直接设置长度为1，，可以省去很多移除元素的麻烦
+			
+			for(var x=0;x<citys[index1-1].length;x++){//citys是一个二维数组  lenth citys[index1]
+				var opt=document.createElement("option");
+				opt.innerHTML=citys[index1-1][x];
+				option1.appendChild(opt);
+			}
+		}
+</script>
+</head>
+<body>
+	<select  id="sid" onchange="selectcity()">
+   			<option>---请选择---</option>
+   			<option>湖南</option>
+   			<option>湖北</option>
+   			<option>浙江</option>
+   			<option>广东</option>
+   	</select>
+	<select  id="ssid">
+   			<option>---请选择---</option>
+   	</select>
+</body>
+</html>
