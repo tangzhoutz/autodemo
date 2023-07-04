@@ -30,10 +30,8 @@ public class ActionTest extends TestBase {
      */
     @Test(groups = {"ActionTest"},enabled=false)
     public void KeywordTest() throws Exception {
-
         //打开指定网页
         webDriver.get("https://tt-dev.unidms.com/Track/");
-
         //判断平台，如果是mac就使用COMMAND键，否则使用CONTROL。
         Keys cmdCtrl = Platform.getCurrent().is(Platform.MAC) ? Keys.COMMAND : Keys.CONTROL;
         //定位到用户名输入框
@@ -51,12 +49,6 @@ public class ActionTest extends TestBase {
                 .perform(); //执行操作，这个是固定的，调用后操作才会执行
         Thread.sleep(3000);
         Assert.assertEquals("SeleniumSelenium!", username.getAttribute("value"));
-        //获取登录后主页的成功标识
-//        WebElement tab_title = webDriver.findElement(By.xpath("//a[text()='主页']"));
-
-        //断言判断上一步的成功标识是否显示，以此判断登录是否成功
-//        Assert.assertEquals(tab_title.isDisplayed(), true, "login succeed");
-
     }
     /**
      * 模拟鼠标操作示例

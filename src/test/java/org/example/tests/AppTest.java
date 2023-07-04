@@ -111,7 +111,7 @@ public class AppTest extends TestBase {
             e.printStackTrace();
         }
         //切换到默认iframe
-        webDriver.switchTo().defaultContent();
+//        webDriver.switchTo().defaultContent();
         //点击退出按钮
         webDriver.findElement(By.xpath("//a[contains(text(),'退出')]")).click();
         //退出弹框中点击确认按钮

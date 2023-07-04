@@ -6,6 +6,7 @@
         <parameter name= "browser" value ="chrome"/>
         <classes>
             <class name="org.example.exercises.IframeTest"/>
+<!--            <class name="org.example.exercises.SelectUse"/>-->
 
         </classes>
     </test>

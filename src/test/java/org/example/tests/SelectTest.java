@@ -31,6 +31,7 @@ public class SelectTest extends TestBase {
         String filePath=url.getPath().replaceAll("(?<=\\s|^)/|/(?=\\s|$)","");
         // 打开网页（直接打开html文件）
         webDriver.get(filePath);
+        Thread.sleep(2000);
         // 定位到select元素
         WebElement selectEle=webDriver.findElement(By.id("vehicle"));
         // 初始化Select类对象

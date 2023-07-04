@@ -74,6 +74,7 @@ public class NewWindowTest extends TestBase {
             System.out.println("title="+webDriver.getTitle());
             if(webDriver.getTitle().contains("百度一下，你就知道")){
                 System.out.println("已正确切换到窗口："+webDriver.getTitle());
+                Thread.sleep(3000);
                 //使用break退出循环，防止继续切换到其他窗口。
                 break;
             }
